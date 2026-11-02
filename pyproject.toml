@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "room-visualiser"
+version = "0.1.0"
+description = "Floor replacement pipeline for room images."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "Proprietary" }
+authors = [
+  { name = "WagglyWonga" }
+]
+dependencies = [
+  "numpy>=1.26,<3",
+  "opencv-python-headless>=4.10,<5",
+  "Pillow>=10,<12",
+  "PyYAML>=6.0,<7",
+  "scikit-image>=0.24,<1",
+]
+
+[project.optional-dependencies]
+api = [
+  "fastapi>=0.115,<1",
+  "uvicorn[standard]>=0.30,<1",
+]
+demo = [
+  "gradio>=5.0,<6",
+]
+hf = [
+  "accelerate>=1.0,<2",
+  "transformers>=4.45,<5",
+]
+dev = [
+  "pytest>=8.2,<9",
+  "ruff>=0.6,<1",
+]
+
+[project.scripts]
+visualiser = "visualiser.cli:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
